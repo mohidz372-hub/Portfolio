@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #f8f9fa; line-height: 1.6; }
+    html { scroll-behavior: smooth; }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    
+    header {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    header .container { position: relative; z-index: 1; }
+    
+    h1 { font-size: 3em; margin-bottom: 10px; font-weight: 700; }
+    .tagline { font-size: 1.2em; color: #e0e0e0; margin-bottom: 20px; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+    .badge { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; font-size: 0.9em; border: 1px solid rgba(255,255,255,0.3); }
+    
+    .social-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .social-links a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    section { padding: 60px 20px; }
+    section.alt { background: #ffffff; }
+    
+    h2 { font-size: 2.2em; margin-bottom: 40px; color: #0f3460; position: relative; padding-bottom: 15px; }
+    h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, #e94560, #ff6b6b); border-radius: 2px; }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .skill-card {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      border-color: #e94560;
+      box-shadow: 0 10px 30px rgba(233, 69, 96, 0.15);
+    }
+    
+    .skill-card .icon {
+      font-size: 2.5em;
+      color: #e94560;
+      margin-bottom: 15px;
+    }
+    
+    .skill-card h3 { font-size: 1.3em; margin-bottom: 10px; color: #1a1a1a; }
+    .skill-card p { color: #666; font-size: 0.95em; }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .project-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      border-color: #e94560;
+    }
+    
+    .project-header {
+      background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+      color: white;
+      padding: 20px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .project-header .icon { font-size: 2.5em; margin-right: 15px; }
+    .project-header h3 { font-size: 1.4em; }
+    
+    .project-content {
+      padding: 25px;
+    }
+    
+    .project-content p { color: #666; margin-bottom: 15px; font-size: 0.95em; line-height: 1.7; }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 15px 0;
+    }
+    
+    .tech-tag {
+      background: #e8f4f8;
+      color: #0f3460;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85em;
+      font-weight: 500;
+      border: 1px solid #c0e0e8;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #e94560;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+    }
+    
+    .project-links a:hover { color: #0f3460; }
+    
+    .experience-timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    
+    .timeline-item {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      border-left: 4px solid #e94560;
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-item:hover {
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .timeline-item h3 { font-size: 1.2em; color: #0f3460; margin-bottom: 5px; }
+    .timeline-item .company { color: #e94560; font-weight: 600; }
+    .timeline-item .duration { color: #999; font-size: 0.9em; margin-bottom: 10px; }
+    .timeline-item p { color: #666; }
+    
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .cert-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .cert-card:hover {
+      border-color: #e94560;
+      background: #fff8f9;
+    }
+    
+    .cert-card .icon { font-size: 2.5em; color: #e94560; margin-bottom: 10px; }
+    .cert-card h3 { color: #0f3460; margin: 10px 0; font-size: 1.1em; }
+    .cert-card p { color: #666; font-size: 0.9em; }
+    
+    footer {
+      background: #0f3460;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #e94560, #ff6b6b);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2em; }
+      h2 { font-size: 1.8em; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      header { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Mohad Imran</h1>
+      <p class="tagline">Cybersecurity & Network Engineering</p>
+      <div class="badges">
+        <span class="badge">🎓 CS Student, University of Sargodha</span>
+        <span class="badge">🔒 Cybersecurity Intern</span>
+        <span class="badge">🌐 Network Engineer</span>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/mohidz372-hub" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/mohad-imran-ba787336a/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="mailto:mohidz372@gmail.com">
+          <i class="fas fa-envelope"></i> Email
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="alt">
+    <div class="container">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Cybersecurity</h3>
+          <p>Ethical hacking, penetration testing, security auditing, threat detection, lab setup (Kali Linux, Metasploit)</p>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-network-wired"></i></div>
+          <h3>Networking</h3>
+          <p>TCP/IP, routing protocols (RIP, OSPF, BGP), SDN, network architecture, Cisco CCNA fundamentals</p>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-code"></i></div>
+          <h3>Programming</h3>
+          <p>Python, JavaScript, React, Node.js, Flask, SQL, REST APIs, ML/AI frameworks</p>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-brain"></i></div>
+          <h3>Machine Learning</h3>
+          <p>TensorFlow, Keras, scikit-learn, NLP, computer vision, model training & deployment</p>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-tools"></i></div>
+          <h3>Security Tools</h3>
+          <p>Nmap, Metasploit, Wireshark, Burp Suite, VirtualBox, Docker, Git</p>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Certifications</h3>
+          <p>Google Cybersecurity Professional Certificate, CCNA (Self Study), Ongoing Security+ training</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-lungs" style="color: #fff;"></i>
+            <h3>PneumoScan AI</h3>
+          </div>
+          <div class="project-content">
+            <p>AI-powered chest X-ray detection system for pneumonia and tuberculosis diagnosis using explainable AI.</p>
+            <div class="tech-stack">
+              <span class="tech-tag">EfficientNetB4</span>
+              <span class="tech-tag">Grad-CAM</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Flask</span>
+            </div>
+            <p><strong>Impact:</strong> Final year capstone project with 95%+ accuracy on test data. Deployed web interface for real-time predictions.</p>
+            <div class="project-links">
+              <a href="#" onclick="sendPrompt('Tell me more about PneumoScan AI architecture'); return false;">Learn More →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-shield-virus" style="color: #fff;"></i>
+            <h3>Phishing URL Detector</h3>
+          </div>
+          <div class="project-content">
+            <p>Machine learning classifier using Random Forest to detect malicious URLs and phishing attacks in real-time.</p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">scikit-learn</span>
+              <span class="tech-tag">Random Forest</span>
+              <span class="tech-tag">Pandas</span>
+            </div>
+            <p><strong>Achievement:</strong> 94% detection accuracy. Comprehensive feature engineering from URL characteristics.</p>
+            <div class="project-links">
+              <a href="#" onclick="sendPrompt('Show me the phishing detector code structure'); return false;">View Project →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-envelope-open-text" style="color: #fff;"></i>
+            <h3>Spam & Phishing Classifier</h3>
+          </div>
+          <div class="project-content">
+            <p>NLP-based text classifier using TF-IDF and multiple algorithms (Naive Bayes, Logistic Regression, SVM).</p>
+            <div class="tech-stack">
+              <span class="tech-tag">NLP</span>
+              <span class="tech-tag">TF-IDF</span>
+              <span class="tech-tag">SVM</span>
+              <span class="tech-tag">Naive Bayes</span>
+            </div>
+            <p><strong>Results:</strong> 92%+ accuracy across models. Ensemble approach for robust classification.</p>
+            <div class="project-links">
+              <a href="#" onclick="sendPrompt('Explain the NLP pipeline for spam detection'); return false;">Explore →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <i class="fas fa-server" style="color: #fff;"></i>
+            <h3>Cybersecurity Lab</h3>
+          </div>
+          <div class="project-content">
+            <p>Hands-on penetration testing environment with VirtualBox, Kali Linux, and Metasploitable 2.</p>
+            <div class="tech-stack">
+              <span class="tech-tag">VirtualBox</span>
+              <span class="tech-tag">Kali Linux</span>
+              <span class="tech-tag">Metasploit</span>
+              <span class="tech-tag">Nmap</span>
+              <span class="tech-tag">Wireshark</span>
+            </div>
+            <p><strong>Focus:</strong> Network reconnaissance, vulnerability scanning, exploitation techniques, security hardening.</p>
+            <div class="project-links">
+              <a href="#" onclick="sendPrompt('What vulnerabilities can I test in this lab?'); return false;">Learn Setup →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="experience-timeline">
+        <div class="timeline-item">
+          <h3>Networking Internship</h3>
+          <span class="company">Emerging Systems & Technologies</span>
+          <p class="duration">Completed</p>
+          <p>Gained practical experience in network configuration, troubleshooting, and TCP/IP protocols. Worked on real-world networking infrastructure projects.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <h3>Vice President, E-Gaming Society</h3>
+          <span class="company">University of Sargodha</span>
+          <p class="duration">2025–2026</p>
+          <p>Leading organizational and technical initiatives, coordinating events, managing team members, and fostering community engagement.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Programming & Cybersecurity Developer</h3>
+          <span class="company">Personal & Academic Projects</span>
+          <p class="duration">Ongoing</p>
+          <p>Building ML security applications, implementing cybersecurity solutions, and developing full-stack web applications for real-world problems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Certifications & Training</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="icon"><i class="fas fa-certificate"></i></div>
+          <h3>Google Cybersecurity Professional Certificate</h3>
+          <p>Comprehensive cybersecurity fundamentals, threat analysis, and security operations</p>
+        </div>
+        <div class="cert-card">
+          <div class="icon"><i class="fas fa-network-wired"></i></div>
+          <h3>CCNA Preparation</h3>
+          <p>Cisco networking fundamentals, routing, switching, and network architecture</p>
+        </div>
+        <div class="cert-card">
+          <div class="icon"><i class="fas fa-code"></i></div>
+          <h3>Advanced Python & ML</h3>
+          <p>Data science, Machine learning, and Python application development</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container" style="text-align: center;">
+      <h2>Let's Connect</h2>
+      <p style="font-size: 1.1em; color: #666; margin-bottom: 30px;">I'm actively seeking cybersecurity and network engineering opportunities. Let's discuss how I can contribute to your team.</p>
+      <button class="cta-button" onclick="sendPrompt('Start a conversation about cybersecurity roles and opportunities');">Start Conversation</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Mohad. Cybersecurity & Network Engineering Portfolio.</p>
+      <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">University of Sargodha | Computer Science</p>
+    </div>
+  </footer>
+
+  <script>
+    function sendPrompt(text) {
+      if (window.sendPrompt) {
+        window.sendPrompt(text);
+      }
+    }
+  </script>
+</body>
+</html>
